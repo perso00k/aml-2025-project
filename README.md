@@ -27,89 +27,234 @@ https://drive.google.com/drive/folders/1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P7?usp=sha
 ### Struttura Gerarchica Completa
 
 ```
-MyDrive/
-└── AML_Project/                          # CARTELLA PRINCIPALE
-    │
-    ├── annotations-main/                  # Dati di Annotazione e Grafi delle Ricette
-    │   ├── annotation_csv/
-    │   │   └── error_annotations.csv     # CSV con etichette di errore (recording_id, is_error)
-    │   ├── annotation_json/
-    │   │   ├── complete_step_annotations.json   # Annotazioni complete: timing degli step
-    │   │   ├── error_annotations.json           # JSON con etichette di errore
-    │   │   ├── environment_combined_splits.json # Split per ambiente
-    │   │   ├── person_combined_splits.json      # Split per persona
-    │   │   └── recordings_combined_splits.json  # Split per video
-    │   └── task_graphs/                  # Grafi canonici delle ricette (JSON)
-    │       ├── microwaveeggsandwich.json
-    │       ├── blenderbananapancakes.json
-    │       └── ... (un JSON per ogni ricetta)
-    |
-    │__ First_Part/
-    |   |__ features/
-    │   |   │__ omnivore.zip
-    |   |   |__ slowfast.zip
-    |   |__ models_result_omnivore/
-    |   |   |__ lstm_step/
-    |   |   |__ lstm_recordings/
-    |   |__ models_result_slowfast/
-    |   |__ error_recognition_best.zip
-    │
-    ├── 3_EgoVLP/                          # Modello EgoVLP (Feature Extractor)
-    │   ├── EgoVLP-main/                   # Repository EgoVLP clonato
-    │   │   ├── model/
-    │   │   ├── utils/
-    │   │   └── ...
-    │   ├── checkpoints/
-    │   │   └── egovlp.pth                 # Checkpoint pre-addestrato EgoVLP
-    │   └── features/                      # Feature video estratte (output Substep 1)
-    │   |   └── {recording_id}_360p_224.mp4_1s_1s.npy  # Embeddings video (dim: [T, 256])
-    |   |__ videos/
-    |       |__ 1_7_360p_224.mp4
-    |       |__ ...
-    |__ pretrained
-    |   |__ jx_vit_base_p16_224-80ecf9dd.pth
-    │
-    └── Extension/                         # CARTELLA OUTPUT: Risultati dei 4 Substep
-        │
-        ├── step_1_HiERO/                  # [SUBSTEP 1] Estrazione Feature Video
-        │   └── steps/
-        │       └── {recording_id}_steps.npz  # Video embeddings + timestamp di ogni step
-        │           Contiene:
-        │           - 'embeddings': [N_steps, 256] (feature video per step)
-        │           - 'segments': [N_steps, 2] (start_time, end_time di ogni step)
-        │
-        ├── step_2_baseline/                # [SUBSTEP 2] Baseline Transformer
-        │   └── model_result/
-        │       └── master_split_ids.json   # Split FIXED: {'train': [...], 'val': [...], 'test': [...]}
-        │                                   # CRUCIALE: Questo file è replicato in tutti gli step successivi
-        │
-        ├── step_3_task_graph/              # [SUBSTEP 3] Feature Testuali e Grafi
-        │   ├── text_features_egovlp/       # Feature testuali estratte (output intermedio)
-        │   │   └── {recipe_id}.pt          # Embeddings testuali: [N_steps, 256]
-        │   ├── matched_features/           # Allineamento Video-Testo (output intermedio)
-        │   │   └── match_{recording_id}.pt # Contiene:
-        │   │       - 'video_features': [N_video_steps, 256]
-        │   │       - 'text_features': [N_recipe_steps, 256]
-        │   │       - 'matches': [(video_idx, recipe_idx), ...]  # Risultato Hungarian
-        │   │       - 'cost_matrix': [N_video_steps, N_recipe_steps]
-        │   └── gnn_ready_data/             # Grafi per GNN (input Substep 4)
-        │       └── gnn_ready_{recording_id}.pt  # Grafo costruito da predizioni:
-        │           Contiene:
-        │           - 'x_text': [N_steps, 256] (feature testuali)
-        │           - 'x_video': [N_steps, 256] (feature video allineate)
-        │           - 'edge_index': [2, E] (archi dal grafo della ricetta)
-        │           - 'y': 0 o 1 (etichetta: errore o no)
-        │           - 'vid_id': recording_id
-        │           - 'recipe': nome ricetta
-        │
-        └── step_4_gnn/                     # [SUBSTEP 4] GNN Classification & Analysis
-            ├── gnn_ready_data_groundtruth/  # Grafi costruiti da Ground Truth
-            │   └── gnn_ready_gt_{recording_id}.pt  # Come gnn_ready_data ma con timing GT
-            ├── models/
-            │   └── best_gnn_model.pth      # Modello GNN addestrato
-            └── results/
-                ├── confusion_matrix.png
-                └── metrics.txt
+AML_Project/
+├── 3_EgoVLP/
+│   ├── checkpoints/
+│   │   └── egovlp.pth
+│   ├── EgoVLP-main/
+│   │   ├── base/
+│   │   │   ├── __init__.py
+│   │   │   ├── base_data_loader.py
+│   │   │   ├── base_dataset.py
+│   │   │   └── ... (2 other files)
+│   │   ├── configs/
+│   │   │   ├── eval/
+│   │   │   │   ├── charades.json
+│   │   │   │   ├── egomcq.json
+│   │   │   │   ├── epic.json
+│   │   │   │   └── ... (2 other files)
+│   │   │   ├── ft/
+│   │   │   │   ├── charades.json
+│   │   │   │   ├── epic.json
+│   │   │   │   ├── oscc.json
+│   │   │   │   └── ... (1 other files)
+│   │   │   └── pt/
+│   │   │       └── egoclip.json
+│   │   ├── data_loader/
+│   │   │   ├── __init__.py
+│   │   │   ├── CharadesEgo_dataset.py
+│   │   │   ├── ConceptualCaptions_dataset.py
+│   │   │   └── ... (9 other files)
+│   │   ├── figures/
+│   │   │   ├── egomcq.jpg
+│   │   │   └── egovlp_framework.jpg
+│   │   ├── logger/
+│   │   │   ├── __init__.py
+│   │   │   ├── logger.py
+│   │   │   ├── logger_config.json
+│   │   │   └── ... (1 other files)
+│   │   ├── model/
+│   │   │   ├── __init__.py
+│   │   │   ├── load_checkpoint.py
+│   │   │   ├── loss.py
+│   │   │   └── ... (3 other files)
+│   │   ├── run/
+│   │   │   ├── test_charades.py
+│   │   │   ├── test_epic.py
+│   │   │   ├── test_mq.py
+│   │   │   └── ... (6 other files)
+│   │   ├── trainer/
+│   │   │   ├── __init__.py
+│   │   │   ├── trainer_charades.py
+│   │   │   ├── trainer_egoclip.py
+│   │   │   └── ... (3 other files)
+│   │   ├── utils/
+│   │   │   ├── __init__.py
+│   │   │   ├── charades_meta.py
+│   │   │   ├── custom_transforms.py
+│   │   │   └── ... (9 other files)
+│   │   ├── environment.yml
+│   │   ├── parse_config.py
+│   │   └── README.md
+│   ├── features/
+│   │   ├── 10_16_360p_224.mp4_1s_1s.npy
+│   │   ├── 10_16_360p_224.mp4_1s_1s.npz
+│   │   ├── 10_18_360p_224.mp4_1s_1s.npy
+│   │   └── ... (765 other files)
+│   ├── pretrained/
+│   │   ├── distilbert-base-uncased/
+│   │   │   └── models--distilbert-base-uncased/
+│   │   │       ├── blobs/
+│   │   │       ├── refs/
+│   │   │       └── snapshots/
+│   │   └── jx_vit_base_p16_224-80ecf9dd.pth
+│   ├── videos/
+│   │   ├── 10_16_360p_224.mp4
+│   │   ├── 10_18_360p_224.mp4
+│   │   ├── 10_24_360p_224.mp4
+│   │   └── ... (381 other files)
+│   └── EgoVLP_video_features.ipynb
+├── annotations-main/
+│   ├── annotation_csv/
+│   │   ├── activity_idx_step_idx.csv
+│   │   ├── activity_step_description.csv
+│   │   ├── average_segment_length.csv
+│   │   └── ... (5 other files)
+│   ├── annotation_json/
+│   │   ├── activity_idx_step_idx.json
+│   │   ├── complete_step_annotations.json
+│   │   ├── error_annotations (1).json
+│   │   └── ... (7 other files)
+│   ├── data_splits/
+│   │   ├── environment_data_split_combined.json
+│   │   ├── environment_data_split_normal.json
+│   │   ├── person_data_split_combined.json
+│   │   └── ... (6 other files)
+│   ├── metadata/
+│   │   ├── average_segment_length.csv
+│   │   └── video_information.csv
+│   ├── task_graphs/
+│   │   ├── blenderbananapancakes.json
+│   │   ├── breakfastburritos.json
+│   │   ├── broccolistirfry.json
+│   │   └── ... (21 other files)
+│   ├── ANNOTATIONS.md
+│   ├── LICENSE
+│   └── README.md
+├── Extension/
+│   ├── step_1_HiERO/
+│   │   ├── HiERO/
+│   │   │   ├── assets/
+│   │   │   │   ├── hiero.png
+│   │   │   │   └── teaser_animated.gif
+│   │   │   ├── checkpoints/
+│   │   │   │   └── hiero_egovlp.pth
+│   │   │   ├── configs/
+│   │   │   │   ├── components/
+│   │   │   │   ├── defaults.yaml
+│   │   │   │   ├── egovlp.yaml
+│   │   │   │   ├── lavila-l.yaml
+│   │   │   │   └── ... (1 other files)
+│   │   │   ├── data/
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── egoclip.py
+│   │   │   │   ├── egomcq.py
+│   │   │   │   └── ... (1 other files)
+│   │   │   ├── ego4d_goalstep/
+│   │   │   │   ├── annotations/
+│   │   │   │   ├── utils/
+│   │   │   │   ├── eval_grounding.py
+│   │   │   │   └── README.md
+│   │   │   ├── egoprocel/
+│   │   │   │   ├── baseline_eval.py
+│   │   │   │   ├── configs.py
+│   │   │   │   ├── evaluate.py
+│   │   │   │   └── ... (3 other files)
+│   │   │   ├── features-extraction/
+│   │   │   │   ├── configs/
+│   │   │   │   ├── models/
+│   │   │   │   ├── scripts/
+│   │   │   │   ├── extract.py
+│   │   │   │   ├── pipe.py
+│   │   │   │   └── README.md
+│   │   │   ├── models/
+│   │   │   │   ├── conv/
+│   │   │   │   ├── ext/
+│   │   │   │   ├── tasks/
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── hiero.py
+│   │   │   ├── utils/
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── dataloading.py
+│   │   │   │   ├── gradients.py
+│   │   │   │   └── ... (3 other files)
+│   │   │   ├── LICENSE
+│   │   │   ├── quickstart.ipynb
+│   │   │   ├── README.md
+│   │   │   └── ... (3 other files)
+│   │   ├── steps/
+│   │   │   ├── 10_16_steps.npz
+│   │   │   ├── 10_18_steps.npz
+│   │   │   ├── 10_24_steps.npz
+│   │   │   └── ... (381 other files)
+│   │   ├── HiERO.ipynb
+│   │   └── video_params_dump.csv
+│   ├── step_2_baseline/
+│   │   ├── model_result/
+│   │   │   ├── best_model.pth
+│   │   │   ├── dataset_split_verification.png
+│   │   │   ├── master_split_ids.json
+│   │   │   └── ... (1 other files)
+│   │   └── baseline.ipynb
+│   ├── step_3_task_graph/
+│   │   ├── gnn_ready_data/
+│   │   │   ├── gnn_ready_10_16.pt
+│   │   │   ├── gnn_ready_10_18.pt
+│   │   │   ├── gnn_ready_10_24.pt
+│   │   │   └── ... (381 other files)
+│   │   ├── matched_features/
+│   │   │   ├── match_10_16.pt
+│   │   │   ├── match_10_18.pt
+│   │   │   ├── match_10_24.pt
+│   │   │   └── ... (381 other files)
+│   │   ├── pretrained/
+│   │   │   └── jx_vit_base_p16_224-80ecf9dd.pth
+│   │   ├── text_features_egovlp/
+│   │   │   ├── blenderbananapancakes.pt
+│   │   │   ├── breakfastburritos.pt
+│   │   │   ├── broccolistirfry.pt
+│   │   │   └── ... (21 other files)
+│   │   └── Substep3.ipynb
+│   └── step_4_gnn/
+│       ├── gnn_ready_data_groundtruth/
+│       │   ├── gnn_ready_gt_10_16.pt
+│       │   ├── gnn_ready_gt_10_18.pt
+│       │   ├── gnn_ready_gt_10_24.pt
+│       │   └── ... (381 other files)
+│       ├── GroundTruth_GraphCreation.ipynb
+│       ├── Substep4_onGT.ipynb
+│       └── Substep4V1.ipynb
+├── First_Part/
+│   ├── features/
+│   │   ├── omnivore.zip
+│   │   └── slowfast.zip
+│   ├── models_result_omnivore/
+│   │   ├── lstm_recordings/
+│   │   │   ├── accuracy_plot.png
+│   │   │   ├── confusion_matrix.png
+│   │   │   ├── final_lstm_report.csv
+│   │   │   └── ... (2 other files)
+│   │   └── lstm_step/
+│   │       ├── accuracy_plot.png
+│   │       ├── confusion_matrix.png
+│   │       ├── final_lstm_report.csv
+│   │       └── ... (2 other files)
+│   ├── models_result_slowfast/
+│   │   ├── lstm_recordings/
+│   │   │   ├── accuracy_plot.png
+│   │   │   ├── confusion_matrix.png
+│   │   │   ├── final_lstm_report.csv
+│   │   │   └── ... (2 other files)
+│   │   └── lstm_step/
+│   │       ├── accuracy_plot.png
+│   │       ├── confusion_matrix.png
+│   │       ├── final_lstm_report.csv
+│   │       └── ... (2 other files)
+│   ├── error_recognition_best.zip
+│   ├── Omnivore.ipynb
+│   └── Slowfast.ipynb
+└── AML-2025_Mistake_Detection_Project.gdoc
+
 ```
 
 ---
