@@ -1,133 +1,73 @@
-# AML 2025 - Progetto di Rilevazione Errori nelle Ricette
+# Procedural Mistake Detection & Task Verification
 
-Questo progetto implementa un sistema di **rilevazione di errori in video di ricette egocentriche** utilizzando una combinazione di **Graph Neural Networks (GNNs)**, feature video e testuali estratte da modelli pre-addestrati.
+## Project Overview
 
-## 📋 Panoramica del Progetto
+This project focuses on **Procedure Understanding** using egocentric videos. Specifically, we address two main tasks:
 
-Il progetto affronta la seguente sfida: dato un video egocentrico di una ricetta, determinare se **l'esecutore ha commesso errori** durante la preparazione.
+- **Mistake Detection**: Identifying errors in individual steps of a recipe (using baselines like SlowFast and Omnivore)
+- **Task Verification (Extension)**: Determining if an entire recipe execution is correct by aligning video steps with a Task Graph
 
-### Architettura Generale
-1. **Feature Video** (EgoVLP + HiERO): Estrazione di embeddings video per ogni step della ricetta
-2. **Feature Testuali** (EgoVLP): Estrazione di embeddings semantici dagli step testuali delle ricette
-3. **Allineamento Multimodale** (Hungarian Algorithm + Temporal Cost): Matching tra video e testo
-4. **Graph Neural Network (GraphSAGE)**: Classificazione binaria (errore/no errore) basata sul grafo della ricetta
+The implementation includes feature extraction using **EgoVLP**, step localization via **HiERO**, and a final graph-based verification using **GNNs**.
 
----
+## Setup & Data Management
 
-## 📁 Struttura del Google Drive (IMPORTANTE)
+This project was developed using **Google Colab** to leverage GPU resources. Consequently, the data pipeline is designed to integrate directly with **Google Drive**.
 
-Per replicare correttamente il progetto, il professore deve creare la seguente struttura su Google Drive:
+To run the notebooks successfully, you must ensure the directory structure in your Google Drive matches the paths defined in the code. You have two options to set this up:
 
-### Link Condiviso (fittizio per ora)
-```
-https://drive.google.com/drive/folders/1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P7?usp=sharing
-```
-*Nota: Sostituire con il link reale quando il progetto è pronto per la consegna*
+### Option A: Direct Drive Access (Recommended)
 
-### Struttura Gerarchica Completa
+We have hosted the entire project structure (including datasets, checkpoints, and features) on a shared Google Drive folder.
 
-```
+**Access the Shared Folder:**
+- Click the following link to access the project resources: **[Link to Shared Google Drive Folder](https://drive.google.com/drive/folders/1vxgD6uYnr2LpQalDA9eOLzCE7O5v_LHt?usp=sharing)**
+
+**Create a Shortcut (Crucial Step):**
+1. Go to the **"Shared with me"** section in your Google Drive
+2. Right-click on the folder named **`AML_Project`**
+3. Select **Organize > Add shortcut**
+4. Navigate to **My Drive** and place the shortcut directly in the root
+
+**Important**: The notebooks mount Drive at `/content/drive/MyDrive/`. If the `AML_Project` folder is not directly reachable via this path, the code will fail to load files.
+
+### Option B: Manual Setup
+
+If you cannot use the shared link, you must manually recreate the exact directory structure inside the root of your Google Drive (`MyDrive`). Ensure your folder structure looks exactly like the tree below. Any deviation in folder naming or nesting will cause `FileNotFoundError` in the notebooks.
+
+```text
 AML_Project/
 ├── 3_EgoVLP/
 │   ├── checkpoints/
 │   │   └── egovlp.pth
 │   ├── EgoVLP-main/
 │   │   ├── base/
-│   │   │   ├── __init__.py
-│   │   │   ├── base_data_loader.py
-│   │   │   ├── base_dataset.py
-│   │   │   └── ... (2 other files)
 │   │   ├── configs/
-│   │   │   ├── eval/
-│   │   │   │   ├── charades.json
-│   │   │   │   ├── egomcq.json
-│   │   │   │   ├── epic.json
-│   │   │   │   └── ... (2 other files)
-│   │   │   ├── ft/
-│   │   │   │   ├── charades.json
-│   │   │   │   ├── epic.json
-│   │   │   │   ├── oscc.json
-│   │   │   │   └── ... (1 other files)
-│   │   │   └── pt/
-│   │   │       └── egoclip.json
 │   │   ├── data_loader/
-│   │   │   ├── __init__.py
-│   │   │   ├── CharadesEgo_dataset.py
-│   │   │   ├── ConceptualCaptions_dataset.py
-│   │   │   └── ... (9 other files)
 │   │   ├── figures/
-│   │   │   ├── egomcq.jpg
-│   │   │   └── egovlp_framework.jpg
 │   │   ├── logger/
-│   │   │   ├── __init__.py
-│   │   │   ├── logger.py
-│   │   │   ├── logger_config.json
-│   │   │   └── ... (1 other files)
 │   │   ├── model/
-│   │   │   ├── __init__.py
-│   │   │   ├── load_checkpoint.py
-│   │   │   ├── loss.py
-│   │   │   └── ... (3 other files)
 │   │   ├── run/
-│   │   │   ├── test_charades.py
-│   │   │   ├── test_epic.py
-│   │   │   ├── test_mq.py
-│   │   │   └── ... (6 other files)
 │   │   ├── trainer/
-│   │   │   ├── __init__.py
-│   │   │   ├── trainer_charades.py
-│   │   │   ├── trainer_egoclip.py
-│   │   │   └── ... (3 other files)
 │   │   ├── utils/
-│   │   │   ├── __init__.py
-│   │   │   ├── charades_meta.py
-│   │   │   ├── custom_transforms.py
-│   │   │   └── ... (9 other files)
 │   │   ├── environment.yml
 │   │   ├── parse_config.py
 │   │   └── README.md
 │   ├── features/
 │   │   ├── 10_16_360p_224.mp4_1s_1s.npy
 │   │   ├── 10_16_360p_224.mp4_1s_1s.npz
-│   │   ├── 10_18_360p_224.mp4_1s_1s.npy
-│   │   └── ... (765 other files)
+│   │   └── ... (extracted features)
 │   ├── pretrained/
 │   │   ├── distilbert-base-uncased/
-│   │   │   └── models--distilbert-base-uncased/
-│   │   │       ├── blobs/
-│   │   │       ├── refs/
-│   │   │       └── snapshots/
 │   │   └── jx_vit_base_p16_224-80ecf9dd.pth
 │   ├── videos/
-│   │   ├── 10_16_360p_224.mp4
-│   │   ├── 10_18_360p_224.mp4
-│   │   ├── 10_24_360p_224.mp4
-│   │   └── ... (381 other files)
+│   │   └── ... (raw video files)
 │   └── EgoVLP_video_features.ipynb
 ├── annotations-main/
 │   ├── annotation_csv/
-│   │   ├── activity_idx_step_idx.csv
-│   │   ├── activity_step_description.csv
-│   │   ├── average_segment_length.csv
-│   │   └── ... (5 other files)
 │   ├── annotation_json/
-│   │   ├── activity_idx_step_idx.json
-│   │   ├── complete_step_annotations.json
-│   │   ├── error_annotations (1).json
-│   │   └── ... (7 other files)
 │   ├── data_splits/
-│   │   ├── environment_data_split_combined.json
-│   │   ├── environment_data_split_normal.json
-│   │   ├── person_data_split_combined.json
-│   │   └── ... (6 other files)
 │   ├── metadata/
-│   │   ├── average_segment_length.csv
-│   │   └── video_information.csv
 │   ├── task_graphs/
-│   │   ├── blenderbananapancakes.json
-│   │   ├── breakfastburritos.json
-│   │   ├── broccolistirfry.json
-│   │   └── ... (21 other files)
 │   ├── ANNOTATIONS.md
 │   ├── LICENSE
 │   └── README.md
@@ -135,92 +75,31 @@ AML_Project/
 │   ├── step_1_HiERO/
 │   │   ├── HiERO/
 │   │   │   ├── assets/
-│   │   │   │   ├── hiero.png
-│   │   │   │   └── teaser_animated.gif
 │   │   │   ├── checkpoints/
-│   │   │   │   └── hiero_egovlp.pth
 │   │   │   ├── configs/
-│   │   │   │   ├── components/
-│   │   │   │   ├── defaults.yaml
-│   │   │   │   ├── egovlp.yaml
-│   │   │   │   ├── lavila-l.yaml
-│   │   │   │   └── ... (1 other files)
 │   │   │   ├── data/
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── egoclip.py
-│   │   │   │   ├── egomcq.py
-│   │   │   │   └── ... (1 other files)
 │   │   │   ├── ego4d_goalstep/
-│   │   │   │   ├── annotations/
-│   │   │   │   ├── utils/
-│   │   │   │   ├── eval_grounding.py
-│   │   │   │   └── README.md
 │   │   │   ├── egoprocel/
-│   │   │   │   ├── baseline_eval.py
-│   │   │   │   ├── configs.py
-│   │   │   │   ├── evaluate.py
-│   │   │   │   └── ... (3 other files)
 │   │   │   ├── features-extraction/
-│   │   │   │   ├── configs/
-│   │   │   │   ├── models/
-│   │   │   │   ├── scripts/
-│   │   │   │   ├── extract.py
-│   │   │   │   ├── pipe.py
-│   │   │   │   └── README.md
 │   │   │   ├── models/
-│   │   │   │   ├── conv/
-│   │   │   │   ├── ext/
-│   │   │   │   ├── tasks/
-│   │   │   │   ├── __init__.py
-│   │   │   │   └── hiero.py
 │   │   │   ├── utils/
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── dataloading.py
-│   │   │   │   ├── gradients.py
-│   │   │   │   └── ... (3 other files)
 │   │   │   ├── LICENSE
 │   │   │   ├── quickstart.ipynb
-│   │   │   ├── README.md
-│   │   │   └── ... (3 other files)
+│   │   │   └── README.md
 │   │   ├── steps/
-│   │   │   ├── 10_16_steps.npz
-│   │   │   ├── 10_18_steps.npz
-│   │   │   ├── 10_24_steps.npz
-│   │   │   └── ... (381 other files)
 │   │   ├── HiERO.ipynb
 │   │   └── video_params_dump.csv
 │   ├── step_2_baseline/
 │   │   ├── model_result/
-│   │   │   ├── best_model.pth
-│   │   │   ├── dataset_split_verification.png
-│   │   │   ├── master_split_ids.json
-│   │   │   └── ... (1 other files)
 │   │   └── baseline.ipynb
 │   ├── step_3_task_graph/
 │   │   ├── gnn_ready_data/
-│   │   │   ├── gnn_ready_10_16.pt
-│   │   │   ├── gnn_ready_10_18.pt
-│   │   │   ├── gnn_ready_10_24.pt
-│   │   │   └── ... (381 other files)
 │   │   ├── matched_features/
-│   │   │   ├── match_10_16.pt
-│   │   │   ├── match_10_18.pt
-│   │   │   ├── match_10_24.pt
-│   │   │   └── ... (381 other files)
 │   │   ├── pretrained/
-│   │   │   └── jx_vit_base_p16_224-80ecf9dd.pth
 │   │   ├── text_features_egovlp/
-│   │   │   ├── blenderbananapancakes.pt
-│   │   │   ├── breakfastburritos.pt
-│   │   │   ├── broccolistirfry.pt
-│   │   │   └── ... (21 other files)
 │   │   └── Substep3.ipynb
 │   └── step_4_gnn/
 │       ├── gnn_ready_data_groundtruth/
-│       │   ├── gnn_ready_gt_10_16.pt
-│       │   ├── gnn_ready_gt_10_18.pt
-│       │   ├── gnn_ready_gt_10_24.pt
-│       │   └── ... (381 other files)
 │       ├── GroundTruth_GraphCreation.ipynb
 │       ├── Substep4_onGT.ipynb
 │       └── Substep4V1.ipynb
@@ -229,190 +108,88 @@ AML_Project/
 │   │   ├── omnivore.zip
 │   │   └── slowfast.zip
 │   ├── models_result_omnivore/
-│   │   ├── lstm_recordings/
-│   │   │   ├── accuracy_plot.png
-│   │   │   ├── confusion_matrix.png
-│   │   │   ├── final_lstm_report.csv
-│   │   │   └── ... (2 other files)
-│   │   └── lstm_step/
-│   │       ├── accuracy_plot.png
-│   │       ├── confusion_matrix.png
-│   │       ├── final_lstm_report.csv
-│   │       └── ... (2 other files)
 │   ├── models_result_slowfast/
-│   │   ├── lstm_recordings/
-│   │   │   ├── accuracy_plot.png
-│   │   │   ├── confusion_matrix.png
-│   │   │   ├── final_lstm_report.csv
-│   │   │   └── ... (2 other files)
-│   │   └── lstm_step/
-│   │       ├── accuracy_plot.png
-│   │       ├── confusion_matrix.png
-│   │       ├── final_lstm_report.csv
-│   │       └── ... (2 other files)
 │   ├── error_recognition_best.zip
 │   ├── Omnivore.ipynb
 │   └── Slowfast.ipynb
 └── AML-2025_Mistake_Detection_Project.gdoc
-
 ```
+## How to Run the Code
 
----
+The project is divided into **modular steps**. Please execute the notebooks in the following logical order:
 
-## 🔍 Descrizione Dettagliata dei Substep
+### 1. Baselines (Mistake Detection)
 
-### Substep 1: Estrazione Feature Video con HiERO e EgoVLP
+**Location:** `First_Part/` directory  
+**Files:** `Omnivore.ipynb` and `Slowfast.ipynb`
 
-**File Notebook**: `First_Part/EgoVLP_video_features.ipynb`, `First_Part/Omnivore.ipynb`, `First_Part/Slowfast.ipynb`, `Extension_Part/Substep_1/HiERO.ipynb`
+**Description:**
+These notebooks independently execute the supervised learning pipeline for step-level mistake detection. They share the same logic but utilize different pre-extracted feature backbones to train **MLP**, **Transformer**, and **LSTM** classifiers.
 
-**Relazione alla Consegna (AML-2025.pdf)**:
-- Implementa l'**extraction di feature video** dalle ricette egocentriche
-- Utilizza modelli pre-addestrati per estrarre embeddings semantici
-- Applica **HiERO zero-shot** per segmentare automaticamente i video in step
+- **Input:** They automatically load the corresponding feature sets from `First_Part/features/` (e.g., `omnivore.zip` or `slowfast.zip`)
+- **Output:** Performance metrics, confusion matrices, and CSV reports are saved to `First_Part/models_result_omnivore/` and `First_Part/models_result_slowfast/` respectively
 
-**Cosa Viene Fatto**:
-1. **Estrazione Feature EgoVLP**: Carica il modello pre-addestrato EgoVLP e estrae embeddings video di dimensione 256 con risoluzione temporale 1 frame/secondo
-2. **Segmentazione HiERO**: Applica il modello HiERO zero-shot per identificare automaticamente i confini tra step nella ricetta
-3. **Generazione Timestamp**: Estrae il timing di inizio e fine per ogni step rilevato
-4. **Output**: File `.npz` contenenti embeddings e timestamp
+### 2. Feature Extraction (Extension)
 
-**Output Generato**:
-- `AML_Project/3_EgoVLP/features/{recording_id}_360p_224.mp4_1s_1s.npy` - Feature video raw
-- `AML_Project/Extension/step_1_HiERO/steps/{recording_id}_steps.npz` - Step segmentati con embeddings
+**Location:** `3_EgoVLP/` directory  
+**File:** `EgoVLP_video_features.ipynb`
 
----
+**Description:**
+This notebook manages the extraction of high-level semantic features from raw video data using the **EgoVLP** backbone.
 
-### Substep 2: Baseline Transformer e Split Consistente
+- **Process:** It first checks for the `EgoVLP-main` repository and installs necessary dependencies. It then processes raw videos located in `3_EgoVLP/videos/`
+- **Output:** It generates compressed feature files (`.npz`) sampled at 1-second intervals, saving them to `3_EgoVLP/features/`. These features are the prerequisites for the step localization in Step 3
 
-**File Notebook**: `Extension_Part/Substep_2/baseline.ipynb`
+### 3. Substep 1 - Step Localization (Extension)
 
-**Relazione alla Consegna (AML-2025.pdf)**:
-- Stabilisce una **baseline di performance** usando un modello Transformer semplice
-- Fissa lo split train/val/test che verrà mantenuto **identico** in tutti gli step successivi
-- Consente il confronto tra la baseline e il modello GNN proposto
+**Location:** `Extension/step_1_HiERO/` directory  
+**Files:** `HiERO.ipynb` and `video_params_dump.csv`
 
-**Cosa Viene Fatto**:
-1. **Caricamento Feature**: Legge i file `.npz` prodotti dal Substep 1
-2. **Definizione Split**: Crea lo split train/val/test e lo salva in `master_split_ids.json`
-3. **Modello Transformer**: Implementa un modello Transformer per classificazione binaria
-4. **Addestramento e Valutazione**: Addestra il modello e riporta metriche di baseline
-5. **Salvataggio Split**: Genera il file critico `master_split_ids.json` usato dagli step successivi
+**Description:**
+This notebook performs unsupervised temporal segmentation of the video features to identify recipe steps.
 
-**Output Generato**:
-- `AML_Project/Extension/step_2_baseline/model_result/master_split_ids.json`
-- Metriche baseline (accuracy, F1, precision, recall)
+**Input:**
+- The features extracted in Step 2 (from `3_EgoVLP/features/`)
+- **Crucial:** The `video_params_dump.csv` file, which contains the target number of clusters (`n_clusters`) and FPS metadata for each video
 
----
+**Process:** It loads the pre-trained HiERO model to compute hierarchical features, then applies spectral clustering to determine step boundaries (start_time, end_time)
 
-### Substep 3: Feature Testuali e Costruzione Grafi Multimodali
+**Output:** It saves the segmentation results (segments and averaged step embeddings) as `.npz` files in `Extension/step_1_HiERO/steps/`
 
-**File Notebook**: `Extension_Part/Substep_3/Substep3.ipynb`
+### 4. Substep 2 - Simple Task Verification Baseline (Extension)
 
-**Relazione alla Consegna (AML-2025.pdf)**:
-- Implementa l'**integrazione multimodale**: combinazione di feature video e testuali
-- Costruisce i **grafi canonici** delle ricette usando i dati di annotazione
-- Applica **allineamento ottimo** tra i segment video predetti e gli step testuali della ricetta
-- Prepara i dati per la **Graph Neural Network**
+**Location:** `Extension/step_2_baseline/` directory  
+**File:** `baseline.ipynb`
 
-**Cosa Viene Fatto**:
-1. **Estrazione Feature Testuali**:
-   - Carica il modello EgoVLP
-   - Estrae embeddings (dim: 256) per ogni step testuale della ricetta
-   - Salva in `step_3_task_graph/text_features_egovlp/`
+**Description:**
+This notebook trains a baseline model (e.g., a Transformer or MLP classifier) to perform the Task Verification task without explicitly using the Task Graph structure.
 
-2. **Allineamento Video-Testo** (Hungarian Algorithm):
-   - Calcola matrice di similarità coseno tra feature video e testuali
-   - Aggiunge **penalità temporale** per favorire l'ordine cronologico corretto
-   - Risolve il problema di assegnamento ottimo con algoritmo Hungarian
-   - Output: matching tra video segments e recipe steps
+**Concept:** It tries to predict if a recipe execution is correct solely by looking at the sequence of visual step embeddings generated in Step 3. Think of this as trying to guess if a sentence is grammatically correct by only looking at the list of words, without applying explicit grammar rules.
 
-3. **Costruzione Grafi**:
-   - Legge il grafo canonico della ricetta da `task_graphs/{recipe_id}.json`
-   - Allinea le feature video agli step del grafo tramite matching
-   - Esegue late fusion: concatena feature video e testuali
-   - Salva grafi in formato PyTorch Geometric
+- **Input:** The sequence of step-level embeddings from `Extension/step_1_HiERO/steps/`
+- **Output:** Model checkpoints and evaluation plots (confusion matrices, accuracy) saved in `Extension/step_2_baseline/model_result/`
 
-4. **Output**: Grafi pronti per la GNN in `step_3_task_graph/gnn_ready_data/`
+### 5. Substep 3 - Task Graph Alignment (Extension)
 
-**Output Generato**:
-- `AML_Project/Extension/step_3_task_graph/text_features_egovlp/{recipe_id}.pt`
-- `AML_Project/Extension/step_3_task_graph/matched_features/match_{recording_id}.pt`
-- `AML_Project/Extension/step_3_task_graph/gnn_ready_data/gnn_ready_{recording_id}.pt`
+**Location:** `Extension/step_3_task_graph/` directory  
+**File:** `Substep3.ipynb`
 
----
+**Description:**
+This notebook aligns the localized video steps (visual domain) with the textual Task Graph nodes (text domain) provided in the annotations.
 
-### Substep 4: Classificazione GNN e Analisi Comparativa
+**Concept:** It acts as a bridge between vision and text. It uses the **Hungarian Matching** algorithm to find the optimal one-to-one pairing between the detected video segments and the recipe instructions based on feature similarity.
 
-**File Notebook**: `Extension_Part/Substep_4/Substep4V1.ipynb`, `Substep4_onGT.ipynb`, `GroundTruth_GraphCreation.ipynb`
+**Input:**
+- Video step embeddings (`Extension/step_1_HiERO/steps/`)
+- Task Graph JSON files (`annotations-main/task_graphs/`)
 
-**Relazione alla Consegna (AML-2025.pdf)**:
-- Implementa la **Graph Neural Network (GraphSAGE)** per classificazione di errori
-- Confronta le performance su **grafi predetti** vs **grafi Ground Truth ideali**
-- Analizza l'impatto della qualità del grafo sulle performance finali
+**Output:** It saves the aligned features (where each video step is "tagged" with its corresponding task node) to `Extension/step_3_task_graph/matched_features/`
 
-**Cosa Viene Fatto**:
+### 6. Substep 4 - Task Verification via GNNs (Extension)
 
-#### 4.1 Substep4V1.ipynb (Classificazione su Grafi Predetti)
-- Carica i grafi costruiti dal Substep 3 (`gnn_ready_data/`)
-- Implementa architettura **GraphSAGE** con:
-  - 2 layer convoluzionali
-  - Batch normalization
-  - Hybrid pooling (concatenazione Max + Mean)
-  - Classificazione binaria con BCEWithLogitsLoss
-- Addestra il modello con early stopping
-- Valuta su test set e genera confusion matrix
+**Location:** `Extension/step_4_gnn/` directory
 
-#### 4.2 GroundTruth_GraphCreation.ipynb (Preparazione Grafi Ideali)
-- Legge le annotazioni Ground Truth da `error_annotations.json`
-- Estrae il timing corretto di ogni step da `complete_step_annotations.json`
-- Estrae feature video usando il timing GT (non predetto)
-- Costruisce grafi "ideali" in `step_4_gnn/gnn_ready_data_groundtruth/`
-- Questi grafi hanno feature perfettamente allineate agli step reali
-
-#### 4.3 Substep4_onGT.ipynb (Valutazione su Grafi Ground Truth)
-- Carica lo stesso modello GNN addestrato su grafi predetti
-- Valuta le performance sugli grafi Ground Truth
-- Confronto critico:
-  - **Se performance GT >> performance predetti**: Il problema è nella qualità del grafo (Step 3)
-  - **Se performance GT ≈ performance predetti**: Il modello GNN è maturo e robusto
-
-**Output Generato**:
-- `AML_Project/Extension/step_4_gnn/gnn_ready_data_groundtruth/gnn_ready_gt_{recording_id}.pt`
-- `best_gnn_model.pth` - Modello GNN addestrato
-- Metriche finali: Accuracy, F1-Score, Recall, Specificity, Confusion Matrix
-
----
-
-## 🚀 Come Replicare il Progetto
-
-### Prerequisiti
-- Google Drive con almeno 50GB di spazio
-- Google Colab con accesso a GPU
-- Repository EgoVLP (link nel progetto)
-
-### Step-by-Step
-
-1. **Creare la struttura Google Drive** seguendo l'albero di cartelle descritto sopra
-
-2. **Caricare i dati**:
-   - Annotazioni JSON in `annotations-main/annotation_json/`
-   - Grafi delle ricette in `annotations-main/task_graphs/`
-   - Checkpoint EgoVLP in `3_EgoVLP/checkpoints/`
-
-3. **Eseguire i Notebook in sequenza**:
-   ```
-   Substep 1 (HiERO.ipynb)
-        ↓
-   Substep 2 (baseline.ipynb) → genera master_split_ids.json
-        ↓
-   Substep 3 (Substep3.ipynb) → genera grafi predetti
-        ↓
-   Substep 4 (Substep4V1.ipynb) → addestra GNN
-   
-   + Parallelo:
-   Substep 4 (GroundTruth_GraphCreation.ipynb) → grafi ideali
-        ↓
-   Substep 4 (Substep4_onGT.ipynb) → valuta su GT
-   ```
+**Description:**
+This is the final classification stage. We use **Graph Neural Networks (GNNs)** to process the aligned task graphs and predict if the recipe execution was correct. This step is split into three notebooks to separate data generation, oracle evaluation, and actual pipeline evaluation.
 
 ---
