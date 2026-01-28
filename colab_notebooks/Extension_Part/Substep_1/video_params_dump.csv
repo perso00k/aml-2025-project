@@ -1,0 +1,385 @@
+video_id,n_clusters,activity_name,source_n_clusters,fps
+1_7,12,Microwave Egg Sandwich,csv_unique_steps,30.0
+2_3,14,Dressed Up Meatballs,csv_unique_steps,30.0
+2_4,14,Dressed Up Meatballs,csv_unique_steps,30.0
+2_5,14,Dressed Up Meatballs,csv_unique_steps,30.0
+2_8,14,Dressed Up Meatballs,csv_unique_steps,30.0
+3_2,14,Microwave Mug Pizza,csv_unique_steps,30.0
+3_5,14,Microwave Mug Pizza,csv_unique_steps,30.0
+4_2,15,Ramen,csv_unique_steps,30.0
+4_3,15,Ramen,csv_unique_steps,30.0
+4_5,15,Ramen,csv_unique_steps,30.0
+4_7,15,Ramen,csv_unique_steps,30.0
+4_9,15,Ramen,csv_unique_steps,30.0
+5_2,16,Coffee,csv_unique_steps,30.0
+5_3,16,Coffee,csv_unique_steps,30.0
+5_4,16,Coffee,csv_unique_steps,30.0
+7_1,11,Breakfast Burritos,csv_unique_steps,30.0
+7_2,11,Breakfast Burritos,csv_unique_steps,30.0
+7_3,11,Breakfast Burritos,csv_unique_steps,30.0
+7_5,11,Breakfast Burritos,csv_unique_steps,30.0
+8_3,7,Spiced Hot Chocolate,csv_unique_steps,30.0
+9_2,11,Microwave French Toast,csv_unique_steps,30.0
+9_4,11,Microwave French Toast,csv_unique_steps,30.0
+9_8,11,Microwave French Toast,csv_unique_steps,30.0
+10_6,17,Pinwheels,csv_unique_steps,30.0
+10_7,17,Pinwheels,csv_unique_steps,30.0
+1_10,12,Microwave Egg Sandwich,csv_unique_steps,30.0
+1_14,12,Microwave Egg Sandwich,csv_unique_steps,30.0
+1_19,12,Microwave Egg Sandwich,csv_unique_steps,30.0
+1_20,12,Microwave Egg Sandwich,csv_unique_steps,30.0
+12_2,9,Tomato Mozzarella Salad,csv_unique_steps,30.0
+1_25,12,Microwave Egg Sandwich,csv_unique_steps,30.0
+12_5,9,Tomato Mozzarella Salad,csv_unique_steps,30.0
+12_6,9,Tomato Mozzarella Salad,csv_unique_steps,30.0
+1_28,12,Microwave Egg Sandwich,csv_unique_steps,30.0
+12_9,9,Tomato Mozzarella Salad,csv_unique_steps,30.0
+1_30,12,Microwave Egg Sandwich,csv_unique_steps,30.0
+1_32,12,Microwave Egg Sandwich,csv_unique_steps,30.0
+1_33,12,Microwave Egg Sandwich,csv_unique_steps,30.0
+1_34,12,Microwave Egg Sandwich,csv_unique_steps,30.0
+13_5,12,Butter Corn Cup,csv_unique_steps,30.0
+1_36,11,Microwave Egg Sandwich,csv_unique_steps,30.0
+1_37,12,Microwave Egg Sandwich,csv_unique_steps,30.0
+13_9,12,Butter Corn Cup,csv_unique_steps,30.0
+1_42,12,Microwave Egg Sandwich,csv_unique_steps,30.0
+1_43,12,Microwave Egg Sandwich,csv_unique_steps,30.0
+1_49,12,Microwave Egg Sandwich,csv_unique_steps,30.0
+15_2,19,Tomato Chutney,csv_unique_steps,30.0
+15_4,19,Tomato Chutney,csv_unique_steps,30.0
+15_5,19,Tomato Chutney,csv_unique_steps,30.0
+15_8,19,Tomato Chutney,csv_unique_steps,30.0
+16_1,23,Scrambled Eggs,csv_unique_steps,30.0
+16_2,23,Scrambled Eggs,csv_unique_steps,30.0
+16_3,23,Scrambled Eggs,csv_unique_steps,30.0
+17_3,11,Cucumber Raita,csv_unique_steps,30.0
+17_5,11,Cucumber Raita,csv_unique_steps,30.0
+17_8,11,Cucumber Raita,csv_unique_steps,30.0
+18_2,13,Zoodles,csv_unique_steps,30.0
+18_3,13,Zoodles,csv_unique_steps,30.0
+18_8,13,Zoodles,csv_unique_steps,30.0
+20_9,17,Sauted Mushrooms,csv_unique_steps,30.0
+2_13,14,Dressed Up Meatballs,csv_unique_steps,30.0
+21_3,14,Blender Banana Pancakes,csv_unique_steps,30.0
+2_17,14,Dressed Up Meatballs,csv_unique_steps,30.0
+21_8,14,Blender Banana Pancakes,csv_unique_steps,30.0
+2_19,14,Dressed Up Meatballs,csv_unique_steps,30.0
+2_22,14,Dressed Up Meatballs,csv_unique_steps,30.0
+22_2,15,Herb Omelet with Fried Tomatoes,csv_unique_steps,30.0
+22_4,15,Herb Omelet with Fried Tomatoes,csv_unique_steps,30.0
+2_26,14,Dressed Up Meatballs,csv_unique_steps,30.0
+22_6,15,Herb Omelet with Fried Tomatoes,csv_unique_steps,30.0
+2_28,14,Dressed Up Meatballs,csv_unique_steps,30.0
+22_8,15,Herb Omelet with Fried Tomatoes,csv_unique_steps,30.0
+2_30,14,Dressed Up Meatballs,csv_unique_steps,30.0
+23_1,25,Broccoli Stir Fry,csv_unique_steps,30.0
+23_5,25,Broccoli Stir Fry,csv_unique_steps,30.0
+23_6,25,Broccoli Stir Fry,csv_unique_steps,30.0
+2_38,14,Dressed Up Meatballs,csv_unique_steps,30.0
+23_9,25,Broccoli Stir Fry,csv_unique_steps,30.0
+2_41,14,Dressed Up Meatballs,csv_unique_steps,30.0
+2_42,14,Dressed Up Meatballs,csv_unique_steps,30.0
+2_46,14,Dressed Up Meatballs,csv_unique_steps,30.0
+2_47,14,Dressed Up Meatballs,csv_unique_steps,30.0
+25_1,19,Pan Fried Tofu,csv_unique_steps,30.0
+25_2,19,Pan Fried Tofu,csv_unique_steps,30.0
+25_3,19,Pan Fried Tofu,csv_unique_steps,30.0
+25_4,19,Pan Fried Tofu,csv_unique_steps,30.0
+25_5,19,Pan Fried Tofu,csv_unique_steps,30.0
+25_6,19,Pan Fried Tofu,csv_unique_steps,30.0
+25_9,19,Pan Fried Tofu,csv_unique_steps,30.0
+26_4,20,Mug Cake,csv_unique_steps,30.0
+26_6,20,Mug Cake,csv_unique_steps,30.0
+26_7,20,Mug Cake,csv_unique_steps,30.0
+27_3,11,Cheese Pimiento,csv_unique_steps,30.0
+27_4,11,Cheese Pimiento,csv_unique_steps,30.0
+27_9,11,Cheese Pimiento,csv_unique_steps,30.0
+28_2,17,Spicy Tuna Avocado Wraps,csv_unique_steps,30.0
+28_3,17,Spicy Tuna Avocado Wraps,csv_unique_steps,30.0
+28_7,17,Spicy Tuna Avocado Wraps,csv_unique_steps,30.0
+29_5,11,Caprese Bruschetta,csv_unique_steps,30.0
+29_6,11,Caprese Bruschetta,csv_unique_steps,30.0
+29_7,11,Caprese Bruschetta,csv_unique_steps,30.0
+3_11,14,Microwave Mug Pizza,csv_unique_steps,30.0
+3_12,14,Microwave Mug Pizza,csv_unique_steps,30.0
+3_13,14,Microwave Mug Pizza,csv_unique_steps,30.0
+3_14,14,Microwave Mug Pizza,csv_unique_steps,30.0
+3_18,14,Microwave Mug Pizza,csv_unique_steps,30.0
+3_22,14,Microwave Mug Pizza,csv_unique_steps,30.0
+3_34,14,Microwave Mug Pizza,csv_unique_steps,30.0
+3_36,14,Microwave Mug Pizza,csv_unique_steps,30.0
+3_46,14,Microwave Mug Pizza,csv_unique_steps,30.0
+3_49,14,Microwave Mug Pizza,csv_unique_steps,30.0
+3_50,14,Microwave Mug Pizza,csv_unique_steps,30.0
+4_17,15,Ramen,csv_unique_steps,30.0
+4_20,15,Ramen,csv_unique_steps,30.0
+4_22,15,Ramen,csv_unique_steps,30.0
+4_24,15,Ramen,csv_unique_steps,30.0
+4_30,15,Ramen,csv_unique_steps,30.0
+4_32,15,Ramen,csv_unique_steps,30.0
+4_35,15,Ramen,csv_unique_steps,30.0
+4_36,15,Ramen,csv_unique_steps,30.0
+4_40,15,Ramen,csv_unique_steps,30.0
+4_43,15,Ramen,csv_unique_steps,30.0
+4_44,15,Ramen,csv_unique_steps,30.0
+5_11,16,Coffee,csv_unique_steps,30.0
+5_15,16,Coffee,csv_unique_steps,30.0
+5_18,16,Coffee,csv_unique_steps,30.0
+5_19,16,Coffee,csv_unique_steps,30.0
+5_22,16,Coffee,csv_unique_steps,30.0
+5_24,16,Coffee,csv_unique_steps,30.0
+5_27,16,Coffee,csv_unique_steps,30.0
+5_28,16,Coffee,csv_unique_steps,30.0
+5_35,16,Coffee,csv_unique_steps,30.0
+5_37,16,Coffee,csv_unique_steps,30.0
+5_42,16,Coffee,csv_unique_steps,30.0
+5_44,16,Coffee,csv_unique_steps,30.0
+7_18,11,Breakfast Burritos,csv_unique_steps,30.0
+7_19,11,Breakfast Burritos,csv_unique_steps,30.0
+7_24,11,Breakfast Burritos,csv_unique_steps,30.0
+7_26,11,Breakfast Burritos,csv_unique_steps,30.0
+7_30,11,Breakfast Burritos,csv_unique_steps,30.0
+7_32,11,Breakfast Burritos,csv_unique_steps,30.0
+7_35,11,Breakfast Burritos,csv_unique_steps,30.0
+7_38,11,Breakfast Burritos,csv_unique_steps,30.0
+7_44,11,Breakfast Burritos,csv_unique_steps,30.0
+7_48,11,Breakfast Burritos,csv_unique_steps,30.0
+7_50,11,Breakfast Burritos,csv_unique_steps,30.0
+8_11,7,Spiced Hot Chocolate,csv_unique_steps,30.0
+8_15,7,Spiced Hot Chocolate,csv_unique_steps,30.0
+8_16,7,Spiced Hot Chocolate,csv_unique_steps,30.0
+8_19,7,Spiced Hot Chocolate,csv_unique_steps,30.0
+8_20,7,Spiced Hot Chocolate,csv_unique_steps,30.0
+8_25,7,Spiced Hot Chocolate,csv_unique_steps,30.0
+8_26,7,Spiced Hot Chocolate,csv_unique_steps,30.0
+8_30,7,Spiced Hot Chocolate,csv_unique_steps,30.0
+8_31,7,Spiced Hot Chocolate,csv_unique_steps,30.0
+8_33,7,Spiced Hot Chocolate,csv_unique_steps,30.0
+8_35,7,Spiced Hot Chocolate,csv_unique_steps,30.0
+8_40,7,Spiced Hot Chocolate,csv_unique_steps,30.0
+8_44,7,Spiced Hot Chocolate,csv_unique_steps,30.0
+8_45,7,Spiced Hot Chocolate,csv_unique_steps,30.0
+8_50,7,Spiced Hot Chocolate,csv_unique_steps,30.0
+9_12,11,Microwave French Toast,csv_unique_steps,30.0
+9_13,11,Microwave French Toast,csv_unique_steps,30.0
+9_15,11,Microwave French Toast,csv_unique_steps,30.0
+9_19,11,Microwave French Toast,csv_unique_steps,30.0
+9_22,11,Microwave French Toast,csv_unique_steps,30.0
+9_24,11,Microwave French Toast,csv_unique_steps,30.0
+9_25,11,Microwave French Toast,csv_unique_steps,30.0
+9_36,11,Microwave French Toast,csv_unique_steps,30.0
+9_45,11,Microwave French Toast,csv_unique_steps,30.0
+9_47,11,Microwave French Toast,csv_unique_steps,30.0
+10_16,17,Pinwheels,csv_unique_steps,30.0
+10_18,17,Pinwheels,csv_unique_steps,30.0
+10_24,17,Pinwheels,csv_unique_steps,30.0
+10_26,17,Pinwheels,csv_unique_steps,30.0
+10_31,17,Pinwheels,csv_unique_steps,30.0
+10_42,17,Pinwheels,csv_unique_steps,30.0
+10_46,17,Pinwheels,csv_unique_steps,30.0
+10_47,17,Pinwheels,csv_unique_steps,30.0
+10_48,17,Pinwheels,csv_unique_steps,30.0
+10_50,17,Pinwheels,csv_unique_steps,30.0
+1_136,12,Microwave Egg Sandwich,csv_unique_steps,30.0
+1_143,12,Microwave Egg Sandwich,csv_unique_steps,30.0
+12_10,9,Tomato Mozzarella Salad,csv_unique_steps,30.0
+12_12,9,Tomato Mozzarella Salad,csv_unique_steps,30.0
+12_13,9,Tomato Mozzarella Salad,csv_unique_steps,30.0
+12_15,9,Tomato Mozzarella Salad,csv_unique_steps,30.0
+12_16,9,Tomato Mozzarella Salad,csv_unique_steps,30.0
+12_17,9,Tomato Mozzarella Salad,csv_unique_steps,30.0
+12_19,9,Tomato Mozzarella Salad,csv_unique_steps,30.0
+12_26,9,Tomato Mozzarella Salad,csv_unique_steps,30.0
+12_38,9,Tomato Mozzarella Salad,csv_unique_steps,30.0
+12_41,9,Tomato Mozzarella Salad,csv_unique_steps,30.0
+12_43,9,Tomato Mozzarella Salad,csv_unique_steps,30.0
+12_48,9,Tomato Mozzarella Salad,csv_unique_steps,30.0
+12_51,9,Tomato Mozzarella Salad,csv_unique_steps,30.0
+13_12,12,Butter Corn Cup,csv_unique_steps,30.0
+13_14,12,Butter Corn Cup,csv_unique_steps,30.0
+13_18,12,Butter Corn Cup,csv_unique_steps,30.0
+13_20,12,Butter Corn Cup,csv_unique_steps,30.0
+13_24,12,Butter Corn Cup,csv_unique_steps,30.0
+13_31,12,Butter Corn Cup,csv_unique_steps,30.0
+13_32,12,Butter Corn Cup,csv_unique_steps,30.0
+13_36,12,Butter Corn Cup,csv_unique_steps,30.0
+13_38,12,Butter Corn Cup,csv_unique_steps,30.0
+13_41,12,Butter Corn Cup,csv_unique_steps,30.0
+13_44,12,Butter Corn Cup,csv_unique_steps,30.0
+13_45,12,Butter Corn Cup,csv_unique_steps,30.0
+15_17,19,Tomato Chutney,csv_unique_steps,30.0
+15_18,19,Tomato Chutney,csv_unique_steps,30.0
+15_19,19,Tomato Chutney,csv_unique_steps,30.0
+15_28,19,Tomato Chutney,csv_unique_steps,30.0
+15_29,19,Tomato Chutney,csv_unique_steps,30.0
+15_30,19,Tomato Chutney,csv_unique_steps,30.0
+15_33,19,Tomato Chutney,csv_unique_steps,30.0
+15_37,19,Tomato Chutney,csv_unique_steps,30.0
+15_39,19,Tomato Chutney,csv_unique_steps,30.0
+15_41,19,Tomato Chutney,csv_unique_steps,30.0
+15_46,19,Tomato Chutney,csv_unique_steps,30.0
+16_10,23,Scrambled Eggs,csv_unique_steps,30.0
+16_17,23,Scrambled Eggs,csv_unique_steps,30.0
+16_18,23,Scrambled Eggs,csv_unique_steps,30.0
+16_20,23,Scrambled Eggs,csv_unique_steps,30.0
+16_23,23,Scrambled Eggs,csv_unique_steps,30.0
+16_26,23,Scrambled Eggs,csv_unique_steps,30.0
+16_27,23,Scrambled Eggs,csv_unique_steps,30.0
+16_28,23,Scrambled Eggs,csv_unique_steps,30.0
+16_35,23,Scrambled Eggs,csv_unique_steps,30.0
+16_39,23,Scrambled Eggs,csv_unique_steps,30.0
+16_40,23,Scrambled Eggs,csv_unique_steps,30.0
+16_42,23,Scrambled Eggs,csv_unique_steps,30.0
+16_44,23,Scrambled Eggs,csv_unique_steps,30.0
+17_10,11,Cucumber Raita,csv_unique_steps,30.0
+17_11,11,Cucumber Raita,csv_unique_steps,30.0
+17_14,11,Cucumber Raita,csv_unique_steps,30.0
+17_15,11,Cucumber Raita,csv_unique_steps,30.0
+17_16,11,Cucumber Raita,csv_unique_steps,30.0
+17_19,11,Cucumber Raita,csv_unique_steps,30.0
+17_20,11,Cucumber Raita,csv_unique_steps,30.0
+17_21,11,Cucumber Raita,csv_unique_steps,30.0
+17_23,11,Cucumber Raita,csv_unique_steps,30.0
+17_28,11,Cucumber Raita,csv_unique_steps,30.0
+17_29,11,Cucumber Raita,csv_unique_steps,30.0
+17_36,11,Cucumber Raita,csv_unique_steps,30.0
+17_37,11,Cucumber Raita,csv_unique_steps,30.0
+17_40,11,Cucumber Raita,csv_unique_steps,30.0
+17_43,11,Cucumber Raita,csv_unique_steps,30.0
+17_45,11,Cucumber Raita,csv_unique_steps,30.0
+17_49,11,Cucumber Raita,csv_unique_steps,30.0
+18_11,13,Zoodles,csv_unique_steps,30.0
+18_12,13,Zoodles,csv_unique_steps,30.0
+18_19,13,Zoodles,csv_unique_steps,30.0
+18_24,13,Zoodles,csv_unique_steps,30.0
+18_27,13,Zoodles,csv_unique_steps,30.0
+18_28,13,Zoodles,csv_unique_steps,30.0
+18_31,13,Zoodles,csv_unique_steps,30.0
+18_33,13,Zoodles,csv_unique_steps,30.0
+18_41,13,Zoodles,csv_unique_steps,30.0
+18_45,13,Zoodles,csv_unique_steps,30.0
+18_49,13,Zoodles,csv_unique_steps,30.0
+20_14,17,Sauted Mushrooms,csv_unique_steps,30.0
+20_16,17,Sauted Mushrooms,csv_unique_steps,30.0
+20_17,17,Sauted Mushrooms,csv_unique_steps,30.0
+20_19,17,Sauted Mushrooms,csv_unique_steps,30.0
+20_22,17,Sauted Mushrooms,csv_unique_steps,30.0
+20_25,17,Sauted Mushrooms,csv_unique_steps,30.0
+20_26,17,Sauted Mushrooms,csv_unique_steps,30.0
+20_29,17,Sauted Mushrooms,csv_unique_steps,30.0
+20_32,17,Sauted Mushrooms,csv_unique_steps,30.0
+20_39,17,Sauted Mushrooms,csv_unique_steps,30.0
+20_44,17,Sauted Mushrooms,csv_unique_steps,30.0
+20_47,17,Sauted Mushrooms,csv_unique_steps,30.0
+20_48,17,Sauted Mushrooms,csv_unique_steps,30.0
+21_11,14,Blender Banana Pancakes,csv_unique_steps,30.0
+21_14,14,Blender Banana Pancakes,csv_unique_steps,30.0
+21_15,14,Blender Banana Pancakes,csv_unique_steps,30.0
+21_17,14,Blender Banana Pancakes,csv_unique_steps,30.0
+21_19,14,Blender Banana Pancakes,csv_unique_steps,30.0
+21_24,14,Blender Banana Pancakes,csv_unique_steps,30.0
+21_25,14,Blender Banana Pancakes,csv_unique_steps,30.0
+21_28,14,Blender Banana Pancakes,csv_unique_steps,30.0
+21_29,14,Blender Banana Pancakes,csv_unique_steps,30.0
+21_32,14,Blender Banana Pancakes,csv_unique_steps,30.0
+21_37,14,Blender Banana Pancakes,csv_unique_steps,30.0
+21_43,14,Blender Banana Pancakes,csv_unique_steps,30.0
+21_44,14,Blender Banana Pancakes,csv_unique_steps,30.0
+21_46,14,Blender Banana Pancakes,csv_unique_steps,30.0
+21_47,14,Blender Banana Pancakes,csv_unique_steps,30.0
+21_50,14,Blender Banana Pancakes,csv_unique_steps,30.0
+22_10,15,Herb Omelet with Fried Tomatoes,csv_unique_steps,30.0
+22_13,15,Herb Omelet with Fried Tomatoes,csv_unique_steps,30.0
+22_21,15,Herb Omelet with Fried Tomatoes,csv_unique_steps,30.0
+22_24,15,Herb Omelet with Fried Tomatoes,csv_unique_steps,30.0
+22_26,15,Herb Omelet with Fried Tomatoes,csv_unique_steps,30.0
+22_30,15,Herb Omelet with Fried Tomatoes,csv_unique_steps,30.0
+22_31,15,Herb Omelet with Fried Tomatoes,csv_unique_steps,30.0
+22_32,15,Herb Omelet with Fried Tomatoes,csv_unique_steps,30.0
+22_37,15,Herb Omelet with Fried Tomatoes,csv_unique_steps,30.0
+22_38,15,Herb Omelet with Fried Tomatoes,csv_unique_steps,30.0
+22_40,15,Herb Omelet with Fried Tomatoes,csv_unique_steps,30.0
+22_41,15,Herb Omelet with Fried Tomatoes,csv_unique_steps,30.0
+23_12,25,Broccoli Stir Fry,csv_unique_steps,30.0
+23_16,25,Broccoli Stir Fry,csv_unique_steps,30.0
+23_17,25,Broccoli Stir Fry,csv_unique_steps,30.0
+23_18,25,Broccoli Stir Fry,csv_unique_steps,30.0
+23_19,25,Broccoli Stir Fry,csv_unique_steps,30.0
+23_23,25,Broccoli Stir Fry,csv_unique_steps,30.0
+23_24,25,Broccoli Stir Fry,csv_unique_steps,30.0
+23_26,25,Broccoli Stir Fry,csv_unique_steps,30.0
+23_32,25,Broccoli Stir Fry,csv_unique_steps,30.0
+23_38,25,Broccoli Stir Fry,csv_unique_steps,30.0
+23_39,25,Broccoli Stir Fry,csv_unique_steps,30.0
+23_41,25,Broccoli Stir Fry,csv_unique_steps,30.0
+25_11,19,Pan Fried Tofu,csv_unique_steps,30.0
+25_13,19,Pan Fried Tofu,csv_unique_steps,30.0
+25_22,19,Pan Fried Tofu,csv_unique_steps,30.0
+25_40,19,Pan Fried Tofu,csv_unique_steps,30.0
+25_41,19,Pan Fried Tofu,csv_unique_steps,30.0
+25_42,19,Pan Fried Tofu,csv_unique_steps,30.0
+25_48,19,Pan Fried Tofu,csv_unique_steps,30.0
+26_17,20,Mug Cake,csv_unique_steps,30.0
+26_18,20,Mug Cake,csv_unique_steps,30.0
+26_19,20,Mug Cake,csv_unique_steps,30.0
+26_20,20,Mug Cake,csv_unique_steps,30.0
+26_22,20,Mug Cake,csv_unique_steps,30.0
+26_24,20,Mug Cake,csv_unique_steps,30.0
+26_29,20,Mug Cake,csv_unique_steps,30.0
+26_30,20,Mug Cake,csv_unique_steps,30.0
+26_34,20,Mug Cake,csv_unique_steps,30.0
+26_36,20,Mug Cake,csv_unique_steps,30.0
+26_39,20,Mug Cake,csv_unique_steps,30.0
+26_42,20,Mug Cake,csv_unique_steps,30.0
+26_46,20,Mug Cake,csv_unique_steps,30.0
+27_13,11,Cheese Pimiento,csv_unique_steps,30.0
+27_15,11,Cheese Pimiento,csv_unique_steps,30.0
+27_17,11,Cheese Pimiento,csv_unique_steps,30.0
+27_18,11,Cheese Pimiento,csv_unique_steps,30.0
+27_26,11,Cheese Pimiento,csv_unique_steps,30.0
+27_29,11,Cheese Pimiento,csv_unique_steps,30.0
+27_31,11,Cheese Pimiento,csv_unique_steps,30.0
+27_34,11,Cheese Pimiento,csv_unique_steps,30.0
+27_37,11,Cheese Pimiento,csv_unique_steps,30.0
+27_38,11,Cheese Pimiento,csv_unique_steps,30.0
+27_45,11,Cheese Pimiento,csv_unique_steps,30.0
+27_49,11,Cheese Pimiento,csv_unique_steps,30.0
+28_10,17,Spicy Tuna Avocado Wraps,csv_unique_steps,30.0
+28_14,17,Spicy Tuna Avocado Wraps,csv_unique_steps,30.0
+28_16,17,Spicy Tuna Avocado Wraps,csv_unique_steps,30.0
+28_21,17,Spicy Tuna Avocado Wraps,csv_unique_steps,30.0
+28_24,17,Spicy Tuna Avocado Wraps,csv_unique_steps,30.0
+28_25,17,Spicy Tuna Avocado Wraps,csv_unique_steps,30.0
+28_26,17,Spicy Tuna Avocado Wraps,csv_unique_steps,30.0
+28_28,17,Spicy Tuna Avocado Wraps,csv_unique_steps,30.0
+28_29,17,Spicy Tuna Avocado Wraps,csv_unique_steps,30.0
+28_38,17,Spicy Tuna Avocado Wraps,csv_unique_steps,30.0
+28_42,17,Spicy Tuna Avocado Wraps,csv_unique_steps,30.0
+28_44,17,Spicy Tuna Avocado Wraps,csv_unique_steps,30.0
+28_45,17,Spicy Tuna Avocado Wraps,csv_unique_steps,30.0
+28_49,17,Spicy Tuna Avocado Wraps,csv_unique_steps,30.0
+28_50,17,Spicy Tuna Avocado Wraps,csv_unique_steps,30.0
+29_15,11,Caprese Bruschetta,csv_unique_steps,30.0
+29_17,11,Caprese Bruschetta,csv_unique_steps,30.0
+29_18,11,Caprese Bruschetta,csv_unique_steps,30.0
+29_19,11,Caprese Bruschetta,csv_unique_steps,30.0
+29_22,11,Caprese Bruschetta,csv_unique_steps,30.0
+29_28,11,Caprese Bruschetta,csv_unique_steps,30.0
+29_29,11,Caprese Bruschetta,csv_unique_steps,30.0
+29_32,11,Caprese Bruschetta,csv_unique_steps,30.0
+29_34,11,Caprese Bruschetta,csv_unique_steps,30.0
+29_35,11,Caprese Bruschetta,csv_unique_steps,30.0
+29_37,11,Caprese Bruschetta,csv_unique_steps,30.0
+29_45,11,Caprese Bruschetta,csv_unique_steps,30.0
+29_48,11,Caprese Bruschetta,csv_unique_steps,30.0
+29_49,11,Caprese Bruschetta,csv_unique_steps,30.0
+4_122,15,Ramen,csv_unique_steps,30.0
+7_135,11,Breakfast Burritos,csv_unique_steps,30.0
+9_108,11,Microwave French Toast,csv_unique_steps,30.0
+12_119,9,Tomato Mozzarella Salad,csv_unique_steps,30.0
+18_101,13,Zoodles,csv_unique_steps,30.0
+21_103,14,Blender Banana Pancakes,csv_unique_steps,30.0
+22_137,15,Herb Omelet with Fried Tomatoes,csv_unique_steps,30.0
+25_109,19,Pan Fried Tofu,csv_unique_steps,30.0
+26_136,20,Mug Cake,csv_unique_steps,30.0
+29_129,11,Caprese Bruschetta,csv_unique_steps,30.0
