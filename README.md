@@ -32,14 +32,14 @@ We have hosted the entire project structure (including datasets, checkpoints, an
 
 ### Option B: Manual Setup
 
-If you cannot use the shared link, you must manually recreate the exact directory structure inside the root of your Google Drive (`MyDrive`). Ensure your folder structure looks exactly like the tree below. Any deviation in folder naming or nesting will cause `FileNotFoundError` in the notebooks.
+If you cannot use the shared link, you must manually recreate the exact directory structure inside the root of your Google Drive (`MyDrive`). Ensure your folder structure looks exactly like the tree below. Any deviation in folder naming or nesting will cause `FileNotFoundError` in the notebooks. 
 
 ```text
 AML_Project/
 ├── 3_EgoVLP/
-│   ├── checkpoints/
+│   ├── checkpoints/   -> Official EgoVLP repository: https://drive.google.com/file/d/1-cP3Gcg0NGDcMZalgJ_615BQdbFIbcj7/view 
 │   │   └── egovlp.pth
-│   ├── EgoVLP-main/
+│   ├── EgoVLP-main/   -> Official EgoVLP repository: https://github.com/showlab/EgoVLP 
 │   │   ├── base/
 │   │   ├── configs/
 │   │   ├── data_loader/
@@ -52,17 +52,10 @@ AML_Project/
 │   │   ├── environment.yml
 │   │   ├── parse_config.py
 │   │   └── README.md
-│   ├── features/
-│   │   ├── 10_16_360p_224.mp4_1s_1s.npy
-│   │   ├── 10_16_360p_224.mp4_1s_1s.npz
-│   │   └── ... (extracted features)
-│   ├── pretrained/
-│   │   ├── distilbert-base-uncased/
-│   │   └── jx_vit_base_p16_224-80ecf9dd.pth
-│   ├── videos/
-│   │   └── ... (raw video files)
-│   └── EgoVLP_video_features.ipynb
-├── annotations-main/
+│   ├── features/   -> Output directory. If you want you can download the extracted features from our Google Drive.  
+│   └── videos/    
+│       └── ... (raw video files) -> Download the videos here: https://drive.google.com/file/d/18rWqGNUzXqlJjLvYVcbeHTJsd4lsJ0Rb/view
+├── annotations-main/  -> You can clone files from the official repository: https://github.com/CaptainCook4D/annotations/tree/main 
 │   ├── annotation_csv/
 │   ├── annotation_json/
 │   ├── data_splits/
@@ -72,8 +65,8 @@ AML_Project/
 │   ├── LICENSE
 │   └── README.md
 ├── Extension/
-│   ├── step_1_HiERO/
-│   │   ├── HiERO/
+│   ├── step_1_HiERO/ 
+│   │   ├── HiERO/  -> You can clone files from the official repository: https://github.com/sapeirone/HiERO 
 │   │   │   ├── assets/
 │   │   │   ├── checkpoints/
 │   │   │   ├── configs/
@@ -86,110 +79,119 @@ AML_Project/
 │   │   │   ├── LICENSE
 │   │   │   ├── quickstart.ipynb
 │   │   │   └── README.md
-│   │   ├── steps/
-│   │   ├── HiERO.ipynb
-│   │   └── video_params_dump.csv
+│   │   ├── steps/ -> Output directory. If you want you can download it from our Google Drive. 
+│   │   └── video_params_dump.csv  -> You can find this file into this repository in    colab_notebooks/Extension_Part/Substep_1
 │   ├── step_2_baseline/
-│   │   ├── model_result/
-│   │   └── baseline.ipynb
-│   ├── step_3_task_graph/
-│   │   ├── gnn_ready_data/
-│   │   ├── matched_features/
-│   │   ├── pretrained/
-│   │   ├── text_features_egovlp/
-│   │   └── Substep3.ipynb
+│   │   └── model_result/ -> Output directory. 
+│   ├── step_3_task_graph/ 
+│   │   ├── gnn_ready_data/ -> Output directory. If you want you can download it from our Google Drive.
+│   │   ├── matched_features/ -> Output directory. If you want you can download it from our Google Drive.
+│   │   └── text_features_egovlp/ Output directory. If you want you can download it from our Google Drive. 
 │   └── step_4_gnn/
-│       ├── gnn_ready_data_groundtruth/
-│       ├── GroundTruth_GraphCreation.ipynb
-│       ├── Substep4_onGT.ipynb
-│       └── Substep4V1.ipynb
-├── First_Part/
-│   ├── features/
-│   │   ├── omnivore.zip
-│   │   └── slowfast.zip
-│   ├── models_result_omnivore/
-│   ├── models_result_slowfast/
-│   ├── error_recognition_best.zip
-│   ├── Omnivore.ipynb
-│   └── Slowfast.ipynb
-└── AML-2025_Mistake_Detection_Project.gdoc
+│       └── gnn_ready_data_groundtruth/ Output directory. If you want you can download it from our Google Drive.
+└── First_Part/
+    ├── features/ -> You can download the zips from here: https://utdallas.app.box.com/s/zzuglo0j0loo8ymdsxfr2zzgf9q2jajc/folder/291562599734 
+    │   ├── omnivore.zip 
+    │   └── slowfast.zip
+    ├── models_result_omnivore/ -> Output directory.
+    ├── models_result_slowfast/ -> Output directory.
+    └── error_recognition_best.zip -> You can download it from https://utdallas.app.box.com/s/uz3s1alrzucz03sleify8kazhuc1ksl3/folder/299366346861 
 ```
 ## How to Run the Code
 
-The project is divided into **modular steps**. Please execute the notebooks in the following logical order:
+The project is divided into **modular steps**. Please execute the notebooks in the following logical order if you start from scratch:
 
 ### 1. Baselines (Mistake Detection)
 
-**Location:** `First_Part/` directory  
-**Files:** `Omnivore.ipynb` and `Slowfast.ipynb`
+**Notebook:** `colab_notebooks\First_Part\Omnivore.ipynb` 
+
+**Notebook:** `colab_notebooks\First_Part\Slowfast.ipynb` 
 
 **Description:**
-These notebooks independently execute the supervised learning pipeline for step-level mistake detection. They share the same logic but utilize different pre-extracted feature backbones to train **MLP**, **Transformer**, and **LSTM** classifiers.
+These notebooks independently execute the supervised learning pipeline for step and recordings level mistake detection. They share the same logic but utilize different pre-extracted feature backbones to train **MLP**, **Transformer**, and **LSTM** classifiers.
 
 - **Input:** They automatically load the corresponding feature sets from `First_Part/features/` (e.g., `omnivore.zip` or `slowfast.zip`)
 - **Output:** Performance metrics, confusion matrices, and CSV reports are saved to `First_Part/models_result_omnivore/` and `First_Part/models_result_slowfast/` respectively
 
 ### 2. Feature Extraction (Extension)
 
-**Location:** `3_EgoVLP/` directory  
-**File:** `EgoVLP_video_features.ipynb`
+**Notebook:** `colab_notebooks\First_Part\EgoVLP_video_features.ipynb`
 
 **Description:**
 This notebook manages the extraction of high-level semantic features from raw video data using the **EgoVLP** backbone.
 
-- **Process:** It first checks for the `EgoVLP-main` repository and installs necessary dependencies. It then processes raw videos located in `3_EgoVLP/videos/`
-- **Output:** It generates compressed feature files (`.npz`) sampled at 1-second intervals, saving them to `3_EgoVLP/features/`. These features are the prerequisites for the step localization in Step 3
+**Input:** 
+- Raw Videos (`3_EgoVLP/videos`) 
+- EgoVLP Repository (`3_EgoVLP/EgoVLP-main`)
+- EgoVLP Checkpoint (`3_EgoVLP/checkpoints/egovlp.pth`)
+
+**Output:** 
+- Extrected Features (`3_EgoVLP/features/`)
 
 ### 3. Substep 1 - Step Localization (Extension)
 
-**Location:** `Extension/step_1_HiERO/` directory  
-**Files:** `HiERO.ipynb` and `video_params_dump.csv`
+**Notebook:** `colab_notebooks\Extension_Part\Substep_1\/HiERO.ipynb`
 
 **Description:**
 This notebook performs unsupervised temporal segmentation of the video features to identify recipe steps.
 
 **Input:**
 - The features extracted in Step 2 (from `3_EgoVLP/features/`)
-- **Crucial:** The `video_params_dump.csv` file, which contains the target number of clusters (`n_clusters`) and FPS metadata for each video
-
-**Process:** It loads the pre-trained HiERO model to compute hierarchical features, then applies spectral clustering to determine step boundaries (start_time, end_time)
+- **Crucial:** The `video_params_dump.csv` file, which contains the target number of clusters (`n_clusters`) and FPS metadata for each video. 
 
 **Output:** It saves the segmentation results (segments and averaged step embeddings) as `.npz` files in `Extension/step_1_HiERO/steps/`
 
 ### 4. Substep 2 - Simple Task Verification Baseline (Extension)
 
-**Location:** `Extension/step_2_baseline/` directory  
-**File:** `baseline.ipynb`
+**Notebook:** `colab_notebooks\Extension_Part\Substep_2\baseline.ipynb`
 
 **Description:**
-This notebook trains a baseline model (e.g., a Transformer or MLP classifier) to perform the Task Verification task without explicitly using the Task Graph structure.
+This notebook trains a baseline to perform the Task Verification task without explicitly using the Task Graph structure.
 
-**Concept:** It tries to predict if a recipe execution is correct solely by looking at the sequence of visual step embeddings generated in Step 3. Think of this as trying to guess if a sentence is grammatically correct by only looking at the list of words, without applying explicit grammar rules.
+**Input:** The sequence of step-level embeddings from `Extension/step_1_HiERO/steps/`
 
-- **Input:** The sequence of step-level embeddings from `Extension/step_1_HiERO/steps/`
-- **Output:** Model checkpoints and evaluation plots (confusion matrices, accuracy) saved in `Extension/step_2_baseline/model_result/`
+**Output:** Model checkpoints and evaluation plots (confusion matrices, accuracy) saved in `Extension/step_2_baseline/model_result/`
 
 ### 5. Substep 3 - Task Graph Alignment (Extension)
 
-**Location:** `Extension/step_3_task_graph/` directory  
-**File:** `Substep3.ipynb`
+**Notebook:** `colab_notebooks\Extension_Part\Substep_3\Substep3.ipynb`
 
 **Description:**
-This notebook aligns the localized video steps (visual domain) with the textual Task Graph nodes (text domain) provided in the annotations.
-
-**Concept:** It acts as a bridge between vision and text. It uses the **Hungarian Matching** algorithm to find the optimal one-to-one pairing between the detected video segments and the recipe instructions based on feature similarity.
+This notebook matches videos and text features and binds them to the respective recipe graph.
 
 **Input:**
 - Video step embeddings (`Extension/step_1_HiERO/steps/`)
 - Task Graph JSON files (`annotations-main/task_graphs/`)
+- Error annotation JSON file (`annotations-main/annotation_json/error_annotations.json`)
 
-**Output:** It saves the aligned features (where each video step is "tagged" with its corresponding task node) to `Extension/step_3_task_graph/matched_features/`
+**Output:** It saves the graphs into `Extension/step_3_task_graph/gnn_ready_data`
 
 ### 6. Substep 4 - Task Verification via GNNs (Extension)
 
-**Location:** `Extension/step_4_gnn/` directory
+**Notebook:** `colab_notebooks\Extension_Part\Substep_4\Substep4V1.ipynb`
 
 **Description:**
 This is the final classification stage. We use **Graph Neural Networks (GNNs)** to process the aligned task graphs and predict if the recipe execution was correct. This step is split into three notebooks to separate data generation, oracle evaluation, and actual pipeline evaluation.
+
+**Input:**
+- Graphs (`Extension/step_3_task_graph/gnn_ready_data`)
+
+### 6.1 Substep 4.b - Task Verification via GNNs on Grount Truth Graphs (Extension)
+
+**Notebook Graph Creation:** `colab_notebooks\Extension_Part\Substep_4\GroundTruth_GraphCreation.ipynb`
+**Notebook Classification:** `colab_notebooks\Extension_Part\Substep_4\Substep4_onGT.ipynb`
+
+**Description:**
+Here we reconstruct the graphs using the annotations in the Ground Truth and we use them to train the GNN. In this way we can compare the results with the ones obtained by our model. 
+
+**Input Graph Creation:**
+- Task Graph JSON files (`annotations-main/task_graphs/`)
+- Error annotation JSON file (`annotations-main/annotation_json/error_annotations.json`)
+- Error annotation JSON file (`annotations-main/annotation_json/complete_step_annotations.json`)
+- Features Video (`3_EgoVLP/features`)
+- Features Text (`Extension/step_3_task_graph/text_features_egovlp`)
+
+**Output Graph Creation / Input Classification**
+- Graphs (`Extension/step_4_gnn/gnn_ready_data_groundtruth`)
 
 ---
